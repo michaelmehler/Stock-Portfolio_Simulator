@@ -1,0 +1,48 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Your Portfolio of Stocks
+{% endblock %}
+
+{% block main %}
+<div class="container mt-4">
+    <h1 class="text-primary">Your Stock Portfolio</h1>
+    <div class="my-4"></div> 
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered">
+            <thead>
+                <th>Symbol</th>
+                <th>Shares</th>
+                <th>Purchase Price</th>
+                <th>Current Price</th>
+                <th>Total</th> 
+                <th>Net Gain/Loss</th>
+            </thead>
+            <tbody>
+                {% for portfolio in portfolios %}
+                <tr>
+                    <td>{{ portfolio.symbol }}</td>
+                    <td>{{ portfolio.shares }}</td>
+                    <td>{{ portfolio.purchase_price | usd }}</td>
+                    <td>{{ portfolio.current_price | usd }}</td>
+                    <td>{{ portfolio.total | usd }}</td> 
+                    <td>{{ (portfolio.total - (portfolio.shares * portfolio.purchase_price)) | usd }}</td> 
+                </tr>
+                {% endfor %}
+                <tr>
+                    <td colspan="4"><strong>Cash Available</strong></td>
+                    <td>{{ cash_available | usd }}</td>
+                    <td>--</td>
+                </tr>
+                <tr>
+                    <td colspan="4"><strong>Total Cash</strong></td> 
+                    <td>{{ total_cash | usd }}</td> 
+                    <td>{{ total_net_gain | usd }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>   
+{% endblock %} 
+
+

@@ -1,0 +1,27 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Purchase A Stock
+{% endblock %}
+
+{% block main %}
+<div class="container mt-4">
+    <h1 class="text-primary">Your Stock Portfolio</h1>
+    <div class="my-4"></div> 
+    <form action="/buy" method="POST">
+        <div class="mb-3">
+            <input autocomplete="off" autofocus class="form-control mx-auto w-auto" name="symbol" placeholder="Stock Ticker" type="text" required>
+        </div> 
+        <div class="mb-3">
+            <input autocomplete="off" autofocus class="form-control mx-auto w-auto" name="shares" placeholder="Amount of Shares" type="text" required>
+        </div>
+        <button class="btn btn-primary" type="submit">Purchase</button> 
+    </form>
+</div>
+<div class="my-4"></div>
+<div>
+{% if symbol and shares %} 
+    <h1 class="text-primary">You Successfully Purchased {{ shares }} shares of {{ symbol }} for {{ (price * shares) | usd }}!</h1>
+{% endif %}
+</div>
+{% endblock %}

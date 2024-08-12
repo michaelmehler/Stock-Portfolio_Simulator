@@ -1,0 +1,38 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Stock Quote
+{% endblock %}
+
+{% block main %}
+<div class="container mt-4">
+    <h1 class="text-primary">Stock Quoter</h1>
+    <div class="my-4"></div>
+    <form action="/quote" method="POST">
+        <div class="mb-3">
+            <input autocomplete="off" autofocus class="form-control mx-auto w-auto" name="symbol" placeholder="Stock Ticker" type="text" required>
+        </div>
+        <button class="btn btn-primary" type="submit">Search</button> 
+    </form>
+    <div class="my-4"></div>
+    <div class="my-4"></div>
+    {% if symbol and price %}
+    <div class="container mt-4">
+        <h1 class="text-primary"> Stock Price </h1>
+        <div class="my-4"></div>
+        <table class="table table-striped table-bordered">
+            <thead>
+                <th>Ticker</th>
+                <th>Current Price</th>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{ symbol }}</td>
+                    <td>{{ price | usd }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    {% endif %} 
+</div>
+{% endblock %}

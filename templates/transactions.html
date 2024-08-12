@@ -1,0 +1,34 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Transaction History
+{% endblock %}
+
+{% block main %}
+<div class="container mt-4">
+    <h1 class="text-primary">Transaction History</h1>
+    <div class="my-4"></div> 
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered">
+            <thead>
+                <th>Transaction Type</th>
+                <th>Ticker</th>
+                <th>Shares</th>
+                <th>Price At Transaction</th>
+                <th>Money Spent/Gained</th> 
+            </thead>
+            <tbody>
+                {% for transaction in transactions %}
+                <tr>
+                    <td>{{ transaction.transaction_type }}</td>
+                    <td>{{ transaction.symbol }}</td>
+                    <td>{{ transaction.shares }}</td>
+                    <td>{{ transaction.price_at_transaction | usd }}</td>
+                    <td>{{ transaction.total | usd }}</td> 
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div> 
+{% endblock %}
